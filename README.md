@@ -1,6 +1,6 @@
 Crawl
 =====
-A free (as in freedom) and cross platform web crawler/spider. This program goes to a web page and returns all the links on said page. Depending on the givin arguments, Crawl will either display the links on the screen or in a log file.
+A free (as in freedom) and cross platform web crawler/spider writen in Visual Basic. This program goes to a web page and returns all the links and or emails on said page. Depending on the given arguments, Crawl will either display the links on the screen or in a log file.
 
 ## Directories
 
@@ -22,3 +22,12 @@ A free (as in freedom) and cross platform web crawler/spider. This program goes 
 
 	Windows*  - .NET Framework 2.0 or higher (never been tested on 1.1)
 	GNU/Linux - Mono 2.5 or higher (never been tested on older versions)
+
+
+
+
+
+
+
+
+Windows* = Any version of Windows as long as it can handle Visual Studios version that supports .NET Framework 2.0 or higher
