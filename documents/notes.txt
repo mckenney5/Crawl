@@ -1,0 +1,17 @@
+Make sure to add the github page to bug report and make sure there is a https:// before the site
+
+#Make -lf set log = true
+
+Add swith for stats at the end like time it took, how many links, how many emails
+
+Add fun facts about how long it took like Ubuntus dontations
+
+Add switch for email search
+
+Add for log the ability to write to log file after x amount of links, clear links, then continue (to save RAM)
+
+Fix bug that doesnt display warnings
+
+Add a better warning with a y/n option
+
+Add a switch for always yes on warning
