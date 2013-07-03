@@ -1,5 +1,3 @@
-﻿'TODO
-'Add option for loading like diffenet anima or no loading
 Imports System
 Imports System.IO
 Imports System.Net
@@ -25,6 +23,7 @@ Module WebCrawler
     Dim i as UInt16 = 0
     Dim TimerOn As Boolean = False
     Dim atype As Integer = 1
+    Dim defaultFcolor As ConsoleColor = Console.ForegroundColor
 
     Public Shared Sub Main(Args() As String)
     Try
@@ -165,7 +164,10 @@ Module WebCrawler
          If Depth >= 2 Then
             Console.ForegroundColor = ConsoleColor.Yellow
             Console.WriteLine("Warning: A depth of two or larger will take a VERY long time to complete!")
-            Console.ForegroundColor = ConsoleColor.White
+            Console.Beep()
+	    Console.ForeGroundColor = defaultFcolor
+	    Console.WriteLine("Press ANY key to continue...")
+	    Console.ReadKey()
          End If
 	 If TimerOn = True then
 	 		Dim TimerThread As New Threading.Thread(AddressOf Timer)
@@ -205,7 +207,13 @@ Module WebCrawler
 	 End If
 	 Console.WriteLine("Listing results:")
 	 Do Until i >= aList.Count
-	    Console.WriteLine(aList(i))
+	    If aList(i).StartsWith("(!) ") = True then
+	 	Console.ForeGroundColor = ConsoleColor.Red
+	  	Console.WriteLine(aList(i))
+	    	Console.ForeGroundColor = defaultFcolor
+	    Else
+	    	Console.WriteLine(aList(i))
+	    End If
 	    i += 1
 	    Thread.Sleep(100)
 	 Loop
