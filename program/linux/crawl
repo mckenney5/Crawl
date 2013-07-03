@@ -1,0 +1,6 @@
+#! /bin/sh
+#This very simple script runs crawl and allows user to simply type 'crawl <arg>'
+#instead of 'mono Crawl <arg>'
+# '$@' is the var holding the command line args you pass to crawl
+#so if you type 'crawl http://example.com' then $@ = http://example.com
+mono Crawl $@
