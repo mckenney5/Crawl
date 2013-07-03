@@ -1,7 +1,7 @@
 -=Notes=-
 
-# = done
-
+#  = done
+-- = Not needed
 Add an OS detection and make log file apear on desktop/home folder (deppending on OS)
 
 Make sure to add the github page to bug report and make sure there is a https:// before the site
@@ -16,8 +16,10 @@ Add switch for email search
 
 Add for log the ability to write to log file after x amount of links, clear links, then continue (to save RAM)
 
-Fix bug that doesnt display warnings
+#Fix bug that doesnt display warnings
 
-Add a better warning with a y/n option
+#Add a better warning with a y/n option
 
-Add a switch for always yes on warning
+--Add a switch for always yes on warning
+
+Make Crawl ping server first before starting
