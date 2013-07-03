@@ -1,0 +1,7 @@
+#This file ignores things that are not needed in the project
+# '*~' means any backup file from editing
+# '*.log' means any log file created from a test search
+# 'copy.sh' is a script I use to quickly copy the compiled program to the ../program dir
+*~
+*.log
+copy.sh
