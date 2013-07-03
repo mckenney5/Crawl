@@ -62,16 +62,19 @@ Module WebCrawler
                 ElseIf al = "-w" Or al = "--website" Then
                     i += 1
                     Website = Args(i)
-                ElseIf al = "-d" Or al = "--delay" Then
+                ElseIf al = "-d" Or al = "--depth" Then
                     i += 1
                     Depth = Args(i)
+		ElseIf al = "-dl" or al = "--delay" then
+		    i += 1
+		    Delay = Args(i)
                 ElseIf al = "-u" Or al = "--user-agent" Then
-                    If Args(i + 1) = "googlebot" Then
+                    i += 1
+		    If Args(i) = "googlebot" Then
                         Agent = "googlebot"
-                    ElseIf Args(i + 1) = "none" Then
+                    ElseIf Args(i) = "none" Then
                         Agent = "none"
                     Else
-                        i += 1
                         Agent = Args(i)
                     End If
                 Else

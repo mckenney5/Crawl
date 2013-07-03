@@ -53,6 +53,8 @@ Note: Installation isn't required but is recommended
 
 ## Notes
 
+So far most (if not all) switches makes crawl unstable. Running Crawl <http/https><Website> is still realitivly stable.
+
 Windows* = Any version of Windows as long as it can handle Visual Studios version that supports .NET Framework 2.0 or higher
 
 GNU/Linux also means any Unix based operating system that can run Mono ( http://mono-project.com )

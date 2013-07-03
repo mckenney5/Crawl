@@ -23,3 +23,5 @@ Add for log the ability to write to log file after x amount of links, clear link
 --Add a switch for always yes on warning
 
 Make Crawl ping server first before starting
+
+Add switch for custom regex
