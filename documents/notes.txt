@@ -1,3 +1,9 @@
+-=Notes=-
+
+# = done
+
+Add an OS detection and make log file apear on desktop/home folder (deppending on OS)
+
 Make sure to add the github page to bug report and make sure there is a https:// before the site
 
 #Make -lf set log = true
