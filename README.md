@@ -21,9 +21,9 @@ A free (as in freedom) and cross platform web crawler/spider written in Visual B
 		windows
 			Crawl.exe - The compiled Crawl program for Windows
 
-		source
-			compile   - A script that compiles Crawl on GNU/Linux
-			Crawl.vb  - The uncompile Visual Basic file of the program
+	source
+		compile   - A script that compiles Crawl on GNU/Linux
+		Crawl.vb  - The uncompile Visual Basic file of the program
 ## Installation
 
 Note: Installation isn't required but is recommended
@@ -55,4 +55,4 @@ Note: Installation isn't required but is recommended
 
 Windows* = Any version of Windows as long as it can handle Visual Studios version that supports .NET Framework 2.0 or higher
 
-GNU/Linux also means any Unix based operating system that can run Mono ( mono-project.com )
+GNU/Linux also means any Unix based operating system that can run Mono ( http://mono-project.com )
