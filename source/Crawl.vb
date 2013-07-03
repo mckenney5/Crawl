@@ -10,7 +10,7 @@ Imports System.Text.RegularExpressions
 
 Module WebCrawler
     Dim Website As String = Nothing
-    Dim Depth As Integer = 1
+    Dim Depth As Integer = 0
     Dim ReadOnly Ver As String = "1.1"
     Dim log As Boolean = False
     Dim logfile as string = "Crawl.log"
@@ -19,58 +19,66 @@ Module WebCrawler
     Dim Delay As Integer = "500"
     Dim DoingWork As Boolean = False
     Dim ShowArt As Boolean = True
-    Dim lstEmails As New ArrayList = Nothing
-    Dim lstUrls As New ArrayList = Nothing
+    Dim lstEmails As New ArrayList
+    Dim lstUrls As New ArrayList
     Dim aList As ArrayList = Nothing
     Dim i as UInt16 = 0
     Dim TimerOn As Boolean = False
+    Dim atype As Integer = 1
 
     Public Shared Sub Main(Args() As String)
     Try
 	i = 0
 	Do until i >= Args.Length
-	  Dim al As string = Args(i).ToLower
-	  If al = "-l" or al = "--log" then
-	    log = true
-	  ElseIf al = "-b" or al = "--bug-report" Then
-	    BugReport()
-	  ElseIf al = "-h" or al = "--help" then
-	    Help()
-	  ElseIf al = "-v" or al = "--version" then
-	    Console.WriteLine("Version: " & Ver)
-	    Environment.Exit(0)
-	  ElseIf al = "-t" or al = "--timer" then
-		TimerOn = True
-	  ElseIf al = "-n" or al = "--no-art" then
-	    ShowArt = False
-	  ElseIf al = "-lf" or al = "--log-file" then
-	    log = true
-	    i += 1
-	    logfile = Args(i)
-	  ElseIf al.StartsWith("http://") = true or al.StartsWith("https://") = true then
-	    Website = al
-	  ElseIf al = "-f" or al = "--file" then
-	    i += 1
-	    Website = Args(i)
-	  ElseIf al = "-w" or al = "--website" then
-	    i += 1
-	    Website = Args(i)
-	  ElseIf al = "-d" or al = "--delay" then
-	    i += 1
-	    Depth = Args(i)
-	  ElseIf al = "-u" or al = "--user-agent" then
-	    If Args(i +1) = "googlebot" then
-	      Agent = "googlebot"
-	    ElseIf Args(i +1) = "none"
-	      Agent = "none"
-	    Else
-	      i += 1
-	      Agent = Args(i)
-	    End If
-	  Else
-	    Console.WriteLine("Invalid syntax. See --help for help")
-	    exit sub
-	  End If
+                Dim al As String = Args(i).ToLower
+                If al = "-l" Or al = "--log" Then
+                    log = True
+                ElseIf al = "-b" Or al = "--bug-report" Then
+                    BugReport()
+                ElseIf al = "-h" Or al = "--help" Then
+                    Help()
+                ElseIf al = "-a" Or al = "--animation" Then
+                    i += 1
+                    atype = Args(i)
+                    If atype > 3 Or atype < 0 Then
+                        Console.WriteLine("Animation must be between 0 - 3")
+                        Environment.Exit(1)
+                    End If
+                ElseIf al = "-v" Or al = "--version" Then
+                    Console.WriteLine("Version: " & Ver)
+                    Environment.Exit(0)
+                ElseIf al = "-t" Or al = "--timer" Then
+                    TimerOn = True
+                ElseIf al = "-n" Or al = "--no-art" Then
+                    ShowArt = False
+                ElseIf al = "-lf" Or al = "--log-file" Then
+                    log = True
+                    i += 1
+                    logfile = Args(i)
+                ElseIf al.StartsWith("http://") = True Or al.StartsWith("https://") = True Then
+                    Website = al
+                ElseIf al = "-f" Or al = "--file" Then
+                    i += 1
+                    Website = Args(i)
+                ElseIf al = "-w" Or al = "--website" Then
+                    i += 1
+                    Website = Args(i)
+                ElseIf al = "-d" Or al = "--delay" Then
+                    i += 1
+                    Depth = Args(i)
+                ElseIf al = "-u" Or al = "--user-agent" Then
+                    If Args(i + 1) = "googlebot" Then
+                        Agent = "googlebot"
+                    ElseIf Args(i + 1) = "none" Then
+                        Agent = "none"
+                    Else
+                        i += 1
+                        Agent = Args(i)
+                    End If
+                Else
+                    Console.WriteLine("Invalid syntax. See --help for help")
+                    Environment.Exit(1)
+                End If
 	  i += 1
 	 loop
 	 Start()
@@ -156,27 +164,40 @@ Module WebCrawler
 	 End If
          If Depth >= 2 Then
             Console.ForegroundColor = ConsoleColor.Yellow
-            Console.WriteLine("Warning: A depth of two or larger will take a long time to complete!")
+            Console.WriteLine("Warning: A depth of two or larger will take a VERY long time to complete!")
             Console.ForegroundColor = ConsoleColor.White
          End If
 	 If TimerOn = True then
-	 	Dim TimerThread As New Threading.Thread(AddressOf Timer)
+	 		Dim TimerThread As New Threading.Thread(AddressOf Timer)
        		TimerThread.Start()
-         End If
+     End If
 	 Dim workthread As New Threading.Thread(AddressOf Work)
-         workthread.Start()
-         DoingWork = True
+     workthread.Start()
+     DoingWork = True
+	 If atype = 1 then
          Do Until DoingWork = False
-	    Console.Clear()
-	    Console.WriteLine("Searching '" & Website & "'.")
-	    Thread.Sleep(500)
-	    Console.Clear()
-	    Console.WriteLine("Searching '" & Website & "'..")
-	    Thread.Sleep(500)
-	    Console.Clear()
-	    Console.WriteLine("Searching '" & Website & "'...")
-	    Thread.Sleep(500)
-	 Loop
+	    	Console.Clear()
+	    	Console.WriteLine("Searching '" & Website & "'.")
+	    	Thread.Sleep(500)
+	    	Console.Clear()
+	    	Console.WriteLine("Searching '" & Website & "'..")
+	    	Thread.Sleep(500)
+	    	Console.Clear()
+	    	Console.WriteLine("Searching '" & Website & "'...")
+	    	Thread.Sleep(500)
+	 	 Loop
+	 ElseIf atype = 0
+            Do Until DoingWork = False
+                Thread.Sleep(1000)
+            Loop
+	 ElseIf atype = 2 then
+	    StarLoad()
+	 ElseIf atype = 3 then
+	    DotLoad()
+	 End If
+    End Sub
+    
+    Private Sub CDone()
 	 Console.Clear()
 	 i = 0
 	 If log = true then
@@ -323,4 +344,30 @@ Module WebCrawler
 	Loop
 	Console.WriteLine("Crawling took " & n / 60 & " minutes")
     End Sub
+    
+    Private Sub StarLoad()
+		Do until DoingWork = False
+			Console.Clear()
+			Console.WriteLine("| Crawling |")
+			Thread.Sleep(100)
+			Console.Clear()
+			Console.WriteLine("/ Crawling /")
+			Thread.Sleep(100)
+			Console.Clear()
+			Console.WriteLine("- Crawling -")
+			Thread.Sleep(100)
+			Console.Clear()
+			Console.WriteLine("\ Crawling \")
+			Thread.Sleep(100)
+		Loop
+	CDone()
+    End Sub
+
+    Private Sub DotLoad()
+		Do until DoingWork = False
+			Console.Write(".")
+			Thread.Sleep(150)
+		Loop
+	CDone()
+   End Sub
 End Module
