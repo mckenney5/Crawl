@@ -23,6 +23,7 @@ Module WebCrawler
     Dim lstUrls As New ArrayList = Nothing
     Dim aList As ArrayList = Nothing
     Dim i as UInt16 = 0
+    Dim TimerOn As Boolean = False
 
     Public Shared Sub Main(Args() As String)
     Try
@@ -38,6 +39,8 @@ Module WebCrawler
 	  ElseIf al = "-v" or al = "--version" then
 	    Console.WriteLine("Version: " & Ver)
 	    Environment.Exit(0)
+	  ElseIf al = "-t" or al = "--timer" then
+		TimerOn = True
 	  ElseIf al = "-n" or al = "--no-art" then
 	    ShowArt = False
 	  ElseIf al = "-lf" or al = "--log-file" then
@@ -156,7 +159,11 @@ Module WebCrawler
             Console.WriteLine("Warning: A depth of two or larger will take a long time to complete!")
             Console.ForegroundColor = ConsoleColor.White
          End If
-         Dim workthread As New Threading.Thread(AddressOf Work)
+	 If TimerOn = True then
+	 	Dim TimerThread As New Threading.Thread(AddressOf Timer)
+       		TimerThread.Start()
+         End If
+	 Dim workthread As New Threading.Thread(AddressOf Work)
          workthread.Start()
          DoingWork = True
          Do Until DoingWork = False
@@ -181,6 +188,8 @@ Module WebCrawler
 	    i += 1
 	    Thread.Sleep(100)
 	 Loop
+	 TimerOn = False
+	 Thread.Sleep(600)
 	 Environment.Exit(0)
     End Sub
     
@@ -191,6 +200,8 @@ Module WebCrawler
 	    i += 1
 	 Loop
 	 Console.WriteLine("Done!")
+	 TimerOn = False
+	 Thread.Sleep(600)
 	 Environment.Exit(0)
 	Catch
 	 ErrorHandler()
@@ -303,4 +314,13 @@ Module WebCrawler
         Next
         Return tReturn
     End Function
+
+    Private Sub Timer()
+	Dim n as UInt64 = 0
+	Do Until TimerOn = False
+		Thread.Sleep(1000)
+		n += 1
+	Loop
+	Console.WriteLine("Crawling took " & n / 60 & " minutes")
+    End Sub
 End Module
