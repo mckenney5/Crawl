@@ -364,6 +364,9 @@ Module WebCrawler
 			Console.Clear()
 			Console.WriteLine("/ Crawling /")
 			Thread.Sleep(100)
+			If DoingWork = False then
+				Exit Do
+			End If
 			Console.Clear()
 			Console.WriteLine("- Crawling -")
 			Thread.Sleep(100)
