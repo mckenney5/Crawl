@@ -6,8 +6,11 @@
 #You need the compiler 'vbnc2' to create the program
 #For debian, type 'sudo apt-get install vbnc2' and you
 #should get the compiler and maybe mono run-time
+#The compiler is piped to more because if there is an error
+#you can actually read it, also more people have 'more' than 'less'
+#yeah that sounds weird...
 echo Compiling...
-vbnc2 -t:exe -nologo -warnaserror -out:Crawl Crawl.vb
+vbnc2 -t:exe -nologo -warnaserror+ -out:Crawl Crawl.vb | more
 echo Creating Windows binary
 cp Crawl Crawl.exe
 #-t:exe		is for a console program
