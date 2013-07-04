@@ -2,6 +2,13 @@
 
 #  = done
 -- = Not needed
+
+Clean up code
+	Remove un-needed comments
+	Fix the horrible indentation
+	Fix Character casing (e.x. some says 'as' while others say 'As')
+	Find a coding standard or write your own
+
 Add an OS detection and make log file apear on desktop/home folder (deppending on OS)
 
 Make sure to add the github page to bug report and make sure there is a https:// before the site
