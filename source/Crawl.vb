@@ -16,13 +16,11 @@ Module WebCrawler
     Dim Agent As String = "qt"
     Dim Delay As Integer = "500"
     Dim DoingWork As Boolean = False
-    Dim ShowArt As Boolean = True
+'    Dim ShowArt As Boolean = True
     Dim lstEmails As New ArrayList
     Dim lstUrls As New ArrayList
     Dim aList As ArrayList = Nothing
     Dim i as UInt16 = 0
-    Dim TimerOn As Boolean = False
-    Dim atype As Integer = 1
     Dim defaultFcolor As ConsoleColor = Console.ForegroundColor
 
     Public Shared Sub Main(Args() As String)
@@ -36,32 +34,17 @@ Module WebCrawler
                     BugReport()
                 ElseIf al = "-h" Or al = "--help" Then
                     Help()
-                ElseIf al = "-a" Or al = "--animation" Then
-                    i += 1
-                    atype = Args(i)
-                    If atype > 3 Or atype < 0 Then
-                        Console.WriteLine("Animation must be between 0 - 3")
-                        Environment.Exit(1)
-                    End If
                 ElseIf al = "-v" Or al = "--version" Then
                     Console.WriteLine("Version: " & Ver)
                     Environment.Exit(0)
-                ElseIf al = "-t" Or al = "--timer" Then
-                    TimerOn = True
-                ElseIf al = "-n" Or al = "--no-art" Then
-                    ShowArt = False
+'                ElseIf al = "-n" Or al = "--no-art" Then
+'                    ShowArt = False
                 ElseIf al = "-lf" Or al = "--log-file" Then
                     log = True
                     i += 1
                     logfile = Args(i)
                 ElseIf al.StartsWith("http://") = True Or al.StartsWith("https://") = True Then
                     Website = al
-                ElseIf al = "-f" Or al = "--file" Then
-                    i += 1
-                    Website = Args(i)
-                ElseIf al = "-w" Or al = "--website" Then
-                    i += 1
-                    Website = Args(i)
                 ElseIf al = "-d" Or al = "--depth" Then
                     i += 1
                     Depth = Args(i)
@@ -84,8 +67,6 @@ Module WebCrawler
 	  i += 1
 	 loop
 	 Start()
-      'Err.Number = 1
-      'ErrorHandler()
     Catch
 	  ErrorHandler()
     End Try
@@ -146,11 +127,11 @@ Module WebCrawler
 	End If
     End Sub
     
-    Private Sub Art()
-	'art
-	ShowArt = False
-	Start()
-    End Sub
+'   Private Sub Art()
+'	'art
+'	ShowArt = False
+'	Start()
+'   End Sub
 
     Private Sub Start()
 	 If Website = Nothing then
@@ -161,9 +142,9 @@ Module WebCrawler
 	    Console.WriteLine("The reason is that people will ban this bot and it will be un-fair to others.")
 	    Environment.Exit(1)
 	 End If
-	 If ShowArt = True then
-	    Art()
-	 End If
+'	 If ShowArt = True then
+'	    Art()
+'	 End If
          If Depth >= 2 Then
             Console.ForegroundColor = ConsoleColor.Yellow
             Console.WriteLine("Warning: A depth of two or larger will take a VERY long time to complete!")
@@ -172,14 +153,14 @@ Module WebCrawler
 	    Console.WriteLine("Press ANY key to continue...")
 	    Console.ReadKey()
          End If
-	 If TimerOn = True then
-	 		Dim TimerThread As New Threading.Thread(AddressOf Timer)
-       		TimerThread.Start()
-     End If
+'	 If TimerOn = True then
+'	 	Dim TimerThread As New Threading.Thread(AddressOf Timer)
+'      		TimerThread.Start()
+'   	 End If
 	 Dim workthread As New Threading.Thread(AddressOf Work)
      workthread.Start()
      DoingWork = True
-	 If atype = 1 then
+'	 If atype = 1 then
          Do Until DoingWork = False
 	    	Console.Clear()
 	    	Console.WriteLine("Searching '" & Website & "'.")
@@ -190,16 +171,7 @@ Module WebCrawler
 	    	Console.Clear()
 	    	Console.WriteLine("Searching '" & Website & "'...")
 	    	Thread.Sleep(500)
-	 	 Loop
-	 ElseIf atype = 0
-            Do Until DoingWork = False
-                Thread.Sleep(1000)
-            Loop
-	 ElseIf atype = 2 then
-	    StarLoad()
-	 ElseIf atype = 3 then
-	    DotLoad()
-	 End If
+	 Loop
     End Sub
     
     Private Sub CDone()
@@ -220,7 +192,7 @@ Module WebCrawler
 	    i += 1
 	    Thread.Sleep(100)
 	 Loop
-	 TimerOn = False
+'	 TimerOn = False
 	 Thread.Sleep(600)
 	 Environment.Exit(0)
     End Sub
@@ -232,7 +204,7 @@ Module WebCrawler
 	    i += 1
 	 Loop
 	 Console.WriteLine("Done!")
-	 TimerOn = False
+'	 TimerOn = False
 	 Thread.Sleep(600)
 	 Environment.Exit(0)
 	Catch
@@ -245,6 +217,7 @@ Module WebCrawler
         DoingWork = False
     End Sub
 
+'Actual work
     Private Function Spider(ByVal url As String, ByVal depth As Integer) As ArrayList
         'aReturn is used to hold the list of urls
         Dim aReturn As New ArrayList
@@ -346,42 +319,4 @@ Module WebCrawler
         Next
         Return tReturn
     End Function
-
-    Private Sub Timer()
-	Dim n as UInt64 = 0
-	Do Until TimerOn = False
-		Thread.Sleep(1000)
-		n += 1
-	Loop
-	Console.WriteLine("Crawling took " & n / 60 & " minutes")
-    End Sub
-    
-    Private Sub StarLoad()
-		Do until DoingWork = False
-			Console.Clear()
-			Console.WriteLine("| Crawling |")
-			Thread.Sleep(100)
-			Console.Clear()
-			Console.WriteLine("/ Crawling /")
-			Thread.Sleep(100)
-			If DoingWork = False then
-				Exit Do
-			End If
-			Console.Clear()
-			Console.WriteLine("- Crawling -")
-			Thread.Sleep(100)
-			Console.Clear()
-			Console.WriteLine("\ Crawling \")
-			Thread.Sleep(100)
-		Loop
-	CDone()
-    End Sub
-
-    Private Sub DotLoad()
-		Do until DoingWork = False
-			Console.Write(".")
-			Thread.Sleep(150)
-		Loop
-	CDone()
-   End Sub
 End Module
