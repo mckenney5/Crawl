@@ -74,25 +74,14 @@ Module WebCrawler
     Private Sub Help() 'to be re-done		ALSO this should include error codes!
         Console.WriteLine("========== Help Page ==========")
         Console.WriteLine()
-        Console.WriteLine("Syntax:")
-        Console.WriteLine("Normal: crawl <Website> <Depth>")
-        Console.WriteLine("With Logs: crawl <cmd>")
-        Console.WriteLine()
-        Console.WriteLine("<Website>    has to be: a valid website on port 80")
-        Console.WriteLine("<Depth>      how deep to go in levels of links")
-        Console.WriteLine("<cmd>        can be: log list clear email url help none googlebot default qt custom")
-        Console.WriteLine()
-        Console.WriteLine("<Website>    A valid website on port 80")
-        Console.WriteLine("<Switch>     Special conditions in crawl")
-        Console.WriteLine("<Depth>      how deep to go in levels of links as integer")
-        Console.WriteLine("<cmd>        Special commands in crawl")
+        Console.WriteLine("SYNOPSIS:")
+	Console.WriteLine("Crawl [Options] [WebSite]")
         Console.WriteLine()
         Console.WriteLine("========== Description ==========")
         Console.WriteLine()
         Console.WriteLine("Qt-Spider " & Ver)
         Console.WriteLine("Created for searching the web for links and emails or anything")
-        Console.WriteLine("else of interest. Original coding designed by a man named Kobe (see credits)")
-        Console.WriteLine("and it is improved by me (see dev).")
+        Console.WriteLine("else of interest.")
         Environment.Exit(0)
     End Sub
     
@@ -106,7 +95,7 @@ Module WebCrawler
 	Console.WriteLine("Make sure you explain what you were doing and take a picture if it helps")
 	Console.WriteLine("Press ENTER to go to our GitHub page...")
 	Console.ReadLine()
-	System.Diagnostics.Process.Start("http://example.com") 'GitHub Goes here 'You need the https://
+	System.Diagnostics.Process.Start("https://github.com/mckenney5/Crawl") 'You need the https://
 	Environment.Exit(0)
     End Sub
     
