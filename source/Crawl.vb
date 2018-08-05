@@ -87,7 +87,6 @@ Module WebCrawler
     
     Private Sub BugReport()
 	Console.WriteLine("How to submit a bug:" & VbNewLine)
-	Console.WriteLine("You can send an email to bug@quitetiny.com with the subject line Crawl <bug>")
 	Console.WriteLine("You can submit an issue on our GitHub" & VbNewLine)
 	Console.WriteLine("Notes:")
 	Console.WriteLine("MAKE SURE YOU HAVE THE MOST CURRENT VERSION")
