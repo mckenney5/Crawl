@@ -1,3 +1,5 @@
+# !-- ARCHIVE ONLY --!
+
 Crawl
 =====
 A free (as in freedom) and cross platform web crawler/spider written in Visual Basic. This program goes to a web page and returns all the links and or emails on said page. Depending on the given arguments, Crawl will either display the links on the screen or in a log file.
